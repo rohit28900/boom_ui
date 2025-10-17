@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 export const siteConfig = {
-  baseUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://www.boomnetwork.in",
+  baseUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://boomui-production.up.railway.app/",
   name: "Boom Network",
   description:
     "Affordable broadband plans with PAN India coverage. Experience high-speed fiber internet with Boom Networks.",
