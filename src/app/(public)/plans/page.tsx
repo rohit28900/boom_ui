@@ -8,7 +8,8 @@ export const metadata: Metadata = seoData.plans;
 // Server-side fetch
 async function getPlans(): Promise<Plan[]> {
   // const res = await fetch("http://localhost:8000/plans/plans/", { cache: "no-store" });
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  // const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";"
+  const apiUrl = "https://web-production-71f8b.up.railway.app"
   const res = await fetch(`${apiUrl}/plans/plans/`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch plans");
   return res.json();
