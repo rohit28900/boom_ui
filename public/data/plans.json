@@ -1,0 +1,77 @@
+{
+  "plans": [
+    {
+      "name": "Basic 50",
+      "speed": "50 Mbps",
+      "price": 499,
+      "type": "basic",
+      "popular": false,
+      "ott": false,
+      "liveTv": false,
+      "features": [
+        "Unlimited Data",
+        "Free Router",
+        "Installation Included"
+      ]
+    },
+    {
+      "name": "Standard 150",
+      "speed": "150 Mbps",
+      "price": 799,
+      "type": "standard",
+      "popular": true,
+      "ott": true,
+      "liveTv": true,
+      "features": [
+        "Unlimited Data",
+        "Wi-Fi 6 Router",
+        "Priority Support"
+      ]
+    },
+    {
+      "name": "Business 300",
+      "speed": "300 Mbps",
+      "price": 1499,
+      "type": "business",
+      "popular": true,
+      "ott": true,
+      "liveTv": true,
+      "features": [
+        "Dedicated Bandwidth",
+        "Static IP",
+        "24x7 Support",
+        "Free Router & Installation"
+      ]
+    },
+    {
+      "name": "Business 500",
+      "speed": "500 Mbps",
+      "price": 1499,
+      "type": "business",
+      "popular": true,
+      "ott": true,
+      "liveTv": true,
+      "features": [
+        "Dedicated Bandwidth",
+        "Static IP",
+        "24x7 Support",
+        "Free Router & Installation"
+      ]
+    },
+    {
+      "name": "Business 500",
+      "speed": "500 Mbps",
+      "price": 1499,
+      "type": "business",
+      "popular": false,
+      "ott": true,
+      "liveTv": true,
+      "features": [
+        "Dedicated Bandwidth",
+        "Static IP",
+        "24x7 Support",
+        "Free Router & Installation"
+      ]
+    }
+  ]
+}

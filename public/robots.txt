@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://boomnetworks.in/sitemap.xml
+
+# Optional: block any private or staging pages
+# Disallow: /admin
+# Disallow: /api
