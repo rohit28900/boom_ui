@@ -1,7 +1,8 @@
 import axios from "axios";
 
 // Use environment variable with fallback to localhost
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+// const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE_URL = "https://web-production-71f8b.up.railway.app/"
 
 // Log the API URL in development for debugging
 if (process.env.NODE_ENV === 'development') {
