@@ -11,7 +11,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
   {
-    image: "/banner/11.png",
+    image: "/banner/banner_1.png",
     title: "Lightning-Fast Fiber Internet",
     subtitle:
       "Experience blazing speeds and unmatched reliability starting at ₹499/month.",

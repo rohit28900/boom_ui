@@ -21,6 +21,7 @@ import HeroSlider from "@/components/HeroSlider";
 import TestimonialCard from "@/components/TestimonialCard";
 import OfferBanner from "@/components/OfferBanner";
 import { seoData } from "@/lib/seo.config";
+import ContactModal from "@/components/ContactModal";
 
 export const metadata: Metadata = seoData.home;
 
@@ -299,6 +300,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <ContactModal image="/form.png"/>
     </main>
   );
 }
