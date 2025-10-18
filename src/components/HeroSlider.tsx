@@ -19,7 +19,7 @@ const slides = [
     button2: { label: "Contact Us", href: "/contact", color: "blue" },
   },
   {
-    image: "/banner/11.png",
+    image: "/banner/slider_cov2.png",
     title: "Built for the Modern Home",
     subtitle: "Stream, game, and work from home with seamless connectivity.",
     button1: { label: "Check Availability", href: "/contact", color: "blue" },

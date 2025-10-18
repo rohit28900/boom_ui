@@ -1,18 +1,20 @@
 import { seoData } from "@/lib/seo.config";
 import type { Metadata } from "next";
 import PlanCardWrapper from "@/components/PlanCardWrapper";
-import  { Plan } from "@/components/PlanCard";
+import { Plan } from "@/components/PlanCard";
+import { get } from "@/lib/api"; // <-- import your api.js GET
 
 export const metadata: Metadata = seoData.plans;
 
-// Server-side fetch
+// Server-side fetch using api.js
 async function getPlans(): Promise<Plan[]> {
-  // const res = await fetch("http://localhost:8000/plans/plans/", { cache: "no-store" });
-  // const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";"
-  const apiUrl = "https://web-production-71f8b.up.railway.app"
-  const res = await fetch(`${apiUrl}/plans/plans/`, { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to fetch plans");
-  return res.json();
+  try {
+    const plans = await get("/plans/plans/"); // relative URL
+    return plans;
+  } catch (err) {
+    console.error("Failed to fetch plans:", err);
+    throw err;
+  }
 }
 
 export default async function PlansPage() {
@@ -21,10 +23,11 @@ export default async function PlansPage() {
   try {
     plans = await getPlans();
   } catch (err) {
-    console.error(err);
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-red-600 text-lg font-semibold">Failed to load plans.</p>
+        <p className="text-red-600 text-lg font-semibold">
+          Failed to load plans.
+        </p>
       </div>
     );
   }
@@ -35,7 +38,8 @@ export default async function PlansPage() {
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold mb-3">Choose Your Perfect Plan</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Lightning-fast internet plans designed for every need. Get started with unlimited data and free installation.
+            Lightning-fast internet plans designed for every need. Get started
+            with unlimited data and free installation.
           </p>
         </div>
 

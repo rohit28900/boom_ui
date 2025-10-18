@@ -66,13 +66,13 @@ export default function Footer() {
                 </div>
               </a>
 
-              <a href={`mailto:${siteConfig.contact.email.sales}`} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all group border border-white/10">
+              <a href={`mailto:${siteConfig.contact.email.info}`} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all group border border-white/10">
                 <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                   <MdEmail className="text-orange-400 text-xl" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Email Us</p>
-                  <p className="text-white font-medium text-sm break-all">{siteConfig.contact.email.sales}</p>
+                  <p className="text-white font-medium text-sm break-all">{siteConfig.contact.email.info}</p>
                 </div>
               </a>
             </div>
@@ -138,9 +138,9 @@ export default function Footer() {
                 <div>
                   <p className="font-medium text-white text-sm mb-1">Head Office</p>
                   <p className="text-gray-400 text-xs leading-relaxed">
-                    {siteConfig.contact.address1.street}<br />
-                    {siteConfig.contact.address1.city}, {siteConfig.contact.address1.state}<br />
-                    {siteConfig.contact.address1.pincode}
+                    {siteConfig.contact.address2.street}<br />
+                    {siteConfig.contact.address2.city}, {siteConfig.contact.address2.state}<br />
+                    {siteConfig.contact.address2.pincode}
                   </p>
                 </div>
               </div>
@@ -151,9 +151,9 @@ export default function Footer() {
                 <div>
                   <p className="font-medium text-white text-sm mb-1">Branch Office</p>
                   <p className="text-gray-400 text-xs leading-relaxed">
-                    {siteConfig.contact.address2.street}<br />
-                    {siteConfig.contact.address2.city}, {siteConfig.contact.address2.state}<br />
-                    {siteConfig.contact.address2.pincode}
+                    {siteConfig.contact.address1.street}<br />
+                    {siteConfig.contact.address1.city}, {siteConfig.contact.address1.state}<br />
+                    {siteConfig.contact.address1.pincode}
                   </p>
                 </div>
               </div>
