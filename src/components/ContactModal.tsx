@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { X, CheckCircle, AlertCircle } from "lucide-react";
-import { post } from "@/lib/api";
+
+const API_URL = "http://localhost:8000/leads/leads/";
 
 const states = [
   "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat",
@@ -19,29 +20,52 @@ export default function PlanInquiryModal({ image = "/images/plan-inquiry.jpg" }:
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState({
     name: "",
-    phone: "",
+    phone_no: "",
     email: "",
-    plan: "Home",
+    connection_type: "home", // Home/Business -> lowercase
     state: "",
+    source: "website",
+    status: "new",
   });
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
+  // Open modal after 5 seconds
   useEffect(() => {
-    const timer = setTimeout(() => setIsOpen(true), 5000); // ⏱️ 5 seconds
+    const timer = setTimeout(() => setIsOpen(true), 5000);
     return () => clearTimeout(timer);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await post("/lead/plan-inquiry", form);
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        console.error("API error:", res.status, text);
+        throw new Error("API error");
+      }
+
       setStatus("success");
       setTimeout(() => {
         setIsOpen(false);
         setStatus("idle");
-        setForm({ name: "", phone: "", email: "", plan: "Home", state: "" });
+        setForm({
+          name: "",
+          phone_no: "",
+          email: "",
+          connection_type: "home",
+          state: "",
+          source: "website",
+          status: "new",
+        });
       }, 1500);
-    } catch {
+    } catch (err) {
+      console.error(err);
       setStatus("error");
     }
   };
@@ -50,7 +74,6 @@ export default function PlanInquiryModal({ image = "/images/plan-inquiry.jpg" }:
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px] z-50">
-      {/* Outer container without rounded corners */}
       <div className="bg-white w-[90%] max-w-3xl shadow-2xl flex overflow-hidden rounded-none">
         
         {/* Left Image Section */}
@@ -92,8 +115,8 @@ export default function PlanInquiryModal({ image = "/images/plan-inquiry.jpg" }:
               type="tel"
               placeholder="Phone"
               className="w-full border border-gray-300 p-2 focus:outline-none focus:border-[#de6f23]"
-              value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+              value={form.phone_no}
+              onChange={(e) => setForm({ ...form, phone_no: e.target.value })}
               required
             />
             <input
@@ -119,11 +142,11 @@ export default function PlanInquiryModal({ image = "/images/plan-inquiry.jpg" }:
 
             <select
               className="w-full border border-gray-300 p-2 focus:outline-none focus:border-[#de6f23]"
-              value={form.plan}
-              onChange={(e) => setForm({ ...form, plan: e.target.value })}
+              value={form.connection_type}
+              onChange={(e) => setForm({ ...form, connection_type: e.target.value })}
             >
               {plans.map((p) => (
-                <option key={p} value={p}>{p}</option>
+                <option key={p} value={p.toLowerCase()}>{p}</option>
               ))}
             </select>
 

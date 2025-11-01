@@ -11,7 +11,7 @@ export interface Plan {
   popular?: boolean;
   ott?: boolean;
   liveTv?: boolean;
-  features: string;
+  features: string[];
 }
 
 interface PlanCardProps {

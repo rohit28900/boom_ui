@@ -15,7 +15,10 @@ import {
   ArrowRight,
   X,
   Sparkles,
+  Zap,
+  Wrench
 } from "lucide-react";
+import { MapPin, Globe2, Users } from "lucide-react";
 
 import HeroSlider from "@/components/HeroSlider";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -256,31 +259,62 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
       <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-[#de6f23] mb-6">
-                Our Performance
-              </h2>
-              <div className="grid grid-cols-2 gap-6">
-                {stats.map((stat, i) => (
-                  <div
-                    key={i}
-                    className="p-6 bg-white rounded-2xl shadow-md shadow-[#de6f23]/10 hover:shadow-lg hover:shadow-[#de6f23]/15 transition"
-                  >
-                    <h3 className="text-2xl font-bold text-[#de6f23]">
-                      {stat.value}
-                    </h3>
-                    <p className="text-gray-600">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  <div className="max-w-7xl mx-auto px-4 text-center">
+    
+    {/* Mission Heading */}
+    <h2 className="text-3xl font-bold text-[#de6f23] mb-4">
+      Connecting Delhi-NCR with Future-Ready Fiber Internet
+    </h2>
+    <p className="text-gray-600 max-w-2xl mx-auto mb-14 text-sm">
+      We are building a next-generation internet network designed for 
+      homes, startups, gamers, and enterprises — 
+      delivering fast, reliable, and affordable FTTH across Delhi-NCR.
+    </p>
+
+    {/* Coverage & Trust Grid */}
+    <div className="grid md:grid-cols-4 gap-6 mb-16">
+      
+      <div className="bg-white p-6 rounded-2xl shadow-md text-center hover:shadow-lg transition">
+        <Wifi className="w-10 h-10 text-[#de6f23] mx-auto mb-3" />
+        <h3 className="font-semibold text-lg text-gray-800">FTTH Network</h3>
+        <p className="text-gray-500 text-sm">High-speed fiber to home & business</p>
+      </div>
+
+      <div className="bg-white p-6 rounded-2xl shadow-md text-center hover:shadow-lg transition">
+        <Globe2 className="w-10 h-10 text-[#de6f23] mx-auto mb-3" />
+        <h3 className="font-semibold text-lg text-gray-800">Low-Latency Backbone</h3>
+        <p className="text-gray-500 text-sm">Built for 4K streaming, gaming & WFH</p>
+      </div>
+
+      <div className="bg-white p-6 rounded-2xl shadow-md text-center hover:shadow-lg transition">
+        <Users className="w-10 h-10 text-[#de6f23] mx-auto mb-3" />
+        <h3 className="font-semibold text-lg text-gray-800">Local NOC Support</h3>
+        <p className="text-gray-500 text-sm">Dedicated Delhi-NCR service engineers</p>
+      </div>
+
+      <div className="bg-white p-6 rounded-2xl shadow-md text-center hover:shadow-lg transition">
+        <MapPin className="w-10 h-10 text-[#de6f23] mx-auto mb-3" />
+        <h3 className="font-semibold text-lg text-gray-800">Expanding Across NCR</h3>
+        <p className="text-gray-500 text-sm">Shahdara • Noida • Ghaziabad • Gurgaon</p>
+      </div>
+    </div>
+
+    {/* CTA */}
+    <div className="bg-white border border-gray-100 shadow-lg rounded-2xl p-8 md:p-10 flex flex-col items-center">
+      <h4 className="text-xl font-bold text-gray-800 mb-2">Want Fiber Connection?</h4>
+      <p className="text-gray-600 mb-6 text-sm">Call our support team to check coverage in your area.</p>
+      <a
+        href="tel:+91 8588822022"
+        className="bg-[#de6f23] text-white px-8 py-3 rounded-xl font-semibold shadow-md hover:bg-[#c9621f] transition"
+      >
+        Call Now
+      </a>
+    </div>
+
+  </div>
+</section>
+
 
       {/* Testimonials Section */}
       <section className="py-20 bg-white" id="testimonials">

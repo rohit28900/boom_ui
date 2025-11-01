@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     siteName: "Boom Networks",
     images: [
       {
-        url: "/og-image.jpg", // add your OG image in /public/
+        url: "/boom_w.png", // add your OG image in /public/
         width: 1200,
         height: 630,
         alt: "Boom Networks",

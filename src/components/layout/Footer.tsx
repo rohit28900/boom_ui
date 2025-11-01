@@ -42,9 +42,9 @@ export default function Footer() {
         <div className="grid lg:grid-cols-12 gap-12 mb-12">
           {/* Brand Section */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="relative w-36 h-24">
+            <div className="relative w-46 h-34">
               <Image
-                src="/logo.jpeg"
+                src="/boom_w.png"
                 alt={siteConfig.company.name}
                 fill
                 className="object-contain"
@@ -149,7 +149,7 @@ export default function Footer() {
               <div className="flex items-start gap-3">
                 <MdLocationOn className="text-orange-400 text-xl mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="font-medium text-white text-sm mb-1">Branch Office</p>
+                  <p className="font-medium text-white text-sm mb-1">Corporate Office</p>
                   <p className="text-gray-400 text-xs leading-relaxed">
                     {siteConfig.contact.address1.street}<br />
                     {siteConfig.contact.address1.city}, {siteConfig.contact.address1.state}<br />
