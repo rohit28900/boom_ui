@@ -156,7 +156,7 @@ export default function Home() {
       quote:
         "Switched from my old ISP and the difference is night and day! Super reliable connection.",
       author: "Priya Sharma",
-      rating: 5,
+      rating: 4,
     },
     {
       quote:
