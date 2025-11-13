@@ -49,7 +49,7 @@ export default function AdminLogin() {
     try {
       // ✅ Use your local FastAPI server
       const res = await axios.post(
-        "https://web-production-71f8b.up.railway.app",
+        "https://web-production-71f8b.up.railway.app/auth/auth/login",
         { email, password },
         { headers: { "Content-Type": "application/json" } }
       );
