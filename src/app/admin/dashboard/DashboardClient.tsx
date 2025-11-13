@@ -3,7 +3,7 @@
 import { useState, JSX } from "react";
 import { Users, TrendingUp, LogOut, User, ChevronDown, X } from "lucide-react";
 import LeadsPage from "../leads/page";
-import PlansPage from "../plan/page";
+import PlansPage from "../Plan/page";
 import { useRouter } from "next/navigation";
 
 type UserType = {
