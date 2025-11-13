@@ -6,9 +6,9 @@ const API_BASE_URL = "https://web-production-71f8b.up.railway.app"
 // const API_BASE_URL = "http://localhost:8000";
 
 // Log the API URL in development for debugging
-if (process.env.NODE_ENV === 'development') {
-  console.log('API Base URL:', API_BASE_URL);
-}
+// if (process.env.NODE_ENV === 'development') {
+//   console.log('API Base URL:', API_BASE_URL);
+// }
 
 // Create Axios instance
 const api = axios.create({
