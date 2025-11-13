@@ -33,7 +33,7 @@ export default function DashboardClient({ user }: { user: UserType }) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    router.replace("/admin/login");
+    router.replace("/login");
   };
 
   return (
