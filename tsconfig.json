@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/components/lead/EnquiryFormModal.jsx"
-, "src/app/admin/leads/page.jsx"  ],
+, "src/app/admin/leads/page.jsx", "src/lib/api.js"  ],
   "exclude": [
     "node_modules"
   ]

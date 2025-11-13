@@ -1,11 +1,31 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // other Next.js config options
+  // ✅ Fix static asset loading for custom domain
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_URL || '',
+
+  // ✅ Optional: redirect root to /home (since that’s your main page)
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/home',
+        permanent: true,
+      },
+    ];
+  },
+
   eslint: {
-    // Ignore ESLint errors during production builds
+    // ✅ Ignore ESLint during production build to avoid deployment blocks
     ignoreDuringBuilds: true,
   },
+
+  // ✅ Recommended for static optimization
+  poweredByHeader: false,
+
+  // ✅ Recommended when using Cloudflare/Railway for stable routing
+  reactStrictMode: true,
+  swcMinify: true,
 };
 
 export default nextConfig;

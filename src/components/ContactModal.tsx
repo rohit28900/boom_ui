@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 import { X, CheckCircle, AlertCircle } from "lucide-react";
 
-const API_URL = "http://localhost:8000/leads/leads/";
+// const API_URL = "http://localhost:8000/leads/leads/";
+const API_URL = "https://web-production-71f8b.up.railway.app"
+
 
 const states = [
   "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat",
