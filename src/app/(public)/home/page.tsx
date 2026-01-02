@@ -41,11 +41,11 @@ export default function Home() {
   const showOffer = true;
 
   const offerConfig = {
-    title: "Diwali Special Offer!",
+    title: "New Year Special Offer!",
     description: "Get 50% OFF on installation + 3 Months Free Netflix",
     ctaText: "Claim Offer",
-    ctaLink: "/plans?offer=diwali2025",
-    validUntil: "Valid until Oct 31, 2025",
+    ctaLink: "/plans?offer=NewYear2026",
+    validUntil: "Valid until Jan 30, 2026",
     badge: "Limited Time",
   };
 
