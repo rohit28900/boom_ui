@@ -1,32 +1,56 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import "../globals.css"; // you can uncomment this if it's in src/app/globals.css
+import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "Boom Networks - High-Speed Internet",
-  description: "Affordable broadband plans with PAN India coverage.",
-  keywords: ["ISP", "Broadband", "Internet", "High-Speed", "Cyber Security"],
+  metadataBase: new URL("https://boomnetwork.in"), 
+
+  title: {
+    default: "Boom Network | High-Speed Fiber Internet for Modern India",
+    template: "%s | Boom Network",
+  },
+
+  description:
+    "Affordable broadband plans with PAN India coverage. Experience high-speed fiber internet with Boom Network.",
+
+  keywords: [
+    "Boom Network",
+    "ISP India",
+    "ISP in Delhi NCR",
+    "Broadband",
+    "Fiber Internet",
+    "High-Speed Internet",
+    "Internet Service Provider",
+  ],
+
+  alternates: {
+    canonical: "https://boomnetwork.in",
+  },
+
   openGraph: {
-    title: "Boom Networks - High-Speed Internet",
-    description: "Affordable broadband plans with PAN India coverage.",
-    url: "https://boomnetworks.in",
-    siteName: "Boom Networks",
+    title: "Boom Network | High-Speed Fiber Internet",
+    description:
+      "Affordable broadband plans with PAN India coverage from Boom Network.",
+    url: "https://boomnetwork.in",
+    siteName: "Boom Network",
     images: [
       {
-        url: "/boom_w.png", // add your OG image in /public/
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Boom Networks",
+        alt: "Boom Network",
       },
     ],
     locale: "en_IN",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Boom Networks - High-Speed Internet",
-    description: "Affordable broadband plans with PAN India coverage.",
+    title: "Boom Network | High-Speed Internet",
+    description:
+      "Affordable broadband plans with PAN India coverage from Boom Network.",
     images: ["/og-image.jpg"],
   },
 };
@@ -39,7 +63,6 @@ export default function PublicLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen bg-white text-gray-900">
-        {/* Navbar and Footer are client components */}
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
