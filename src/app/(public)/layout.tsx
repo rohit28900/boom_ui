@@ -61,8 +61,11 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="flex flex-col min-h-screen bg-white text-gray-900">
+    <html lang="en" suppressHydrationWarning>
+      <body 
+        className="flex flex-col min-h-screen bg-white text-gray-900"
+        suppressHydrationWarning
+      >
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

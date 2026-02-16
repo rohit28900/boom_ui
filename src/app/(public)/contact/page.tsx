@@ -155,7 +155,7 @@ export default function ContactPage() {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-[#de6f23]" />
-                <a href="mailto:info@velocitysignals.com" className="text-gray-900 text-sm font-medium hover:text-[#de6f23]">info@velocitysignals.com</a>
+                <a href="mailto:info@boomnetwork.in" className="text-gray-900 text-sm font-medium hover:text-[#de6f23]">info@boomnetwork.in</a>
               </div>
               <div className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-[#de6f23]" />

@@ -12,27 +12,49 @@ import {
 } from "lucide-react";
 import { get, post, put, remove } from "@/lib/api";
 
+/* ---------------- Types ---------------- */
+
+type Plan = {
+  id: number;
+  name: string;
+  price: number;
+  features: string;
+  speed: string;
+  ott: boolean;
+  live_tv: boolean;
+  popular: boolean;
+};
+
+type NewPlan = Omit<Plan, "id">;
+
+/* ---------------- Page ---------------- */
+
 export default function PlansPage() {
-  const [plans, setPlans] = useState<any[]>([]);
+  const [plans, setPlans] = useState<Plan[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [newPlan, setNewPlan] = useState({
+
+  const [newPlan, setNewPlan] = useState<NewPlan>({
     name: "",
-    price: "",
+    price: 0,
     features: "",
     speed: "",
     ott: false,
     live_tv: false,
     popular: false,
   });
-  const [editPlanId, setEditPlanId] = useState<number | null>(null);
-  const [editPlanData, setEditPlanData] = useState<any>({});
 
-  // Fetch all plans
+  const [editPlanId, setEditPlanId] = useState<number | null>(null);
+  const [editPlanData, setEditPlanData] = useState<Plan | null>(null);
+
+  /* ---------------- API helpers ---------------- */
+
   const fetchPlans = async () => {
+    setLoading(true);
     try {
-      const res = await get("/plans/plans");
-      setPlans(res.data);
+      const plans = await get("/plans/plans");
+      setPlans(plans); // ✅ FIX: no `.data`
+      setError("");
     } catch (err) {
       console.error(err);
       setError("Failed to load plans");
@@ -41,14 +63,16 @@ export default function PlansPage() {
     }
   };
 
-  // Add a new plan
   const handleAddPlan = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await post("/plans/plans", newPlan);
+      await post("/plans/plans", {
+        ...newPlan,
+        price: Number(newPlan.price), // ✅ ensure number
+      });
       setNewPlan({
         name: "",
-        price: "",
+        price: 0,
         features: "",
         speed: "",
         ott: false,
@@ -62,8 +86,7 @@ export default function PlansPage() {
     }
   };
 
-  // Delete a plan
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     if (!confirm("Are you sure you want to delete this plan?")) return;
     try {
       await remove(`/plans/plans/${id}`);
@@ -74,17 +97,20 @@ export default function PlansPage() {
     }
   };
 
-  // Edit a plan
-  const handleEdit = (plan: any) => {
+  const handleEdit = (plan: Plan) => {
     setEditPlanId(plan.id);
     setEditPlanData({ ...plan });
   };
 
-  // Save updated plan
-  const handleSave = async (id: string) => {
+  const handleSave = async (id: number) => {
+    if (!editPlanData) return;
     try {
-      await put(`/plans/plans/${id}`, editPlanData);
+      await put(`/plans/plans/${id}`, {
+        ...editPlanData,
+        price: Number(editPlanData.price),
+      });
       setEditPlanId(null);
+      setEditPlanData(null);
       fetchPlans();
     } catch (err) {
       console.error(err);
@@ -96,16 +122,21 @@ export default function PlansPage() {
     fetchPlans();
   }, []);
 
-  if (loading)
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-screen text-gray-600">
         Loading plans...
       </div>
     );
+  }
+
+  /* ---------------- UI ---------------- */
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-2xl font-bold mb-4 text-gray-900">Plan Management</h1>
+      <h1 className="text-2xl font-bold mb-4 text-gray-900">
+        Plan Management
+      </h1>
 
       {error && <p className="text-red-500 mb-2">{error}</p>}
 
@@ -119,7 +150,9 @@ export default function PlansPage() {
           placeholder="Name"
           className="border p-2 rounded flex-1 min-w-[150px]"
           value={newPlan.name}
-          onChange={(e) => setNewPlan({ ...newPlan, name: e.target.value })}
+          onChange={(e) =>
+            setNewPlan({ ...newPlan, name: e.target.value })
+          }
           required
         />
         <input
@@ -127,7 +160,9 @@ export default function PlansPage() {
           placeholder="Price"
           className="border p-2 rounded flex-1 min-w-[100px]"
           value={newPlan.price}
-          onChange={(e) => setNewPlan({ ...newPlan, price: e.target.value })}
+          onChange={(e) =>
+            setNewPlan({ ...newPlan, price: Number(e.target.value) })
+          }
           required
         />
         <input
@@ -135,25 +170,31 @@ export default function PlansPage() {
           placeholder="Speed (e.g., 100 Mbps)"
           className="border p-2 rounded flex-1 min-w-[120px]"
           value={newPlan.speed}
-          onChange={(e) => setNewPlan({ ...newPlan, speed: e.target.value })}
+          onChange={(e) =>
+            setNewPlan({ ...newPlan, speed: e.target.value })
+          }
         />
         <input
           type="text"
-          placeholder="Features (comma separated)"
+          placeholder="Features"
           className="border p-2 rounded flex-1 min-w-[200px]"
           value={newPlan.features}
-          onChange={(e) => setNewPlan({ ...newPlan, features: e.target.value })}
+          onChange={(e) =>
+            setNewPlan({ ...newPlan, features: e.target.value })
+          }
         />
 
-        {/* Boolean Toggles */}
         <label className="flex items-center gap-1 text-sm">
           <input
             type="checkbox"
             checked={newPlan.ott}
-            onChange={(e) => setNewPlan({ ...newPlan, ott: e.target.checked })}
+            onChange={(e) =>
+              setNewPlan({ ...newPlan, ott: e.target.checked })
+            }
           />
           OTT
         </label>
+
         <label className="flex items-center gap-1 text-sm">
           <input
             type="checkbox"
@@ -164,6 +205,7 @@ export default function PlansPage() {
           />
           Live TV
         </label>
+
         <label className="flex items-center gap-1 text-sm">
           <input
             type="checkbox"
@@ -199,14 +241,14 @@ export default function PlansPage() {
             </tr>
           </thead>
           <tbody>
-            {plans.length > 0 ? (
+            {plans.length ? (
               plans.map((plan) => (
                 <tr key={plan.id} className="border-t hover:bg-gray-50">
-                  {editPlanId === plan.id ? (
+                  {editPlanId === plan.id && editPlanData ? (
                     <>
-                      <td className="py-2 px-4 border">
+                      <td className="border p-2">
                         <input
-                          type="text"
+                          className="border p-1 w-full"
                           value={editPlanData.name}
                           onChange={(e) =>
                             setEditPlanData({
@@ -214,12 +256,11 @@ export default function PlansPage() {
                               name: e.target.value,
                             })
                           }
-                          className="border p-1 rounded w-full"
                         />
                       </td>
-                      <td className="py-2 px-4 border">
+                      <td className="border p-2">
                         <input
-                          type="text"
+                          className="border p-1 w-full"
                           value={editPlanData.speed}
                           onChange={(e) =>
                             setEditPlanData({
@@ -227,25 +268,24 @@ export default function PlansPage() {
                               speed: e.target.value,
                             })
                           }
-                          className="border p-1 rounded w-full"
                         />
                       </td>
-                      <td className="py-2 px-4 border">
+                      <td className="border p-2">
                         <input
                           type="number"
+                          className="border p-1 w-full"
                           value={editPlanData.price}
                           onChange={(e) =>
                             setEditPlanData({
                               ...editPlanData,
-                              price: e.target.value,
+                              price: Number(e.target.value),
                             })
                           }
-                          className="border p-1 rounded w-full"
                         />
                       </td>
-                      <td className="py-2 px-4 border">
+                      <td className="border p-2">
                         <input
-                          type="text"
+                          className="border p-1 w-full"
                           value={editPlanData.features}
                           onChange={(e) =>
                             setEditPlanData({
@@ -253,10 +293,9 @@ export default function PlansPage() {
                               features: e.target.value,
                             })
                           }
-                          className="border p-1 rounded w-full"
                         />
                       </td>
-                      <td className="text-center border">
+                      <td className="border text-center">
                         <input
                           type="checkbox"
                           checked={editPlanData.ott}
@@ -268,7 +307,7 @@ export default function PlansPage() {
                           }
                         />
                       </td>
-                      <td className="text-center border">
+                      <td className="border text-center">
                         <input
                           type="checkbox"
                           checked={editPlanData.live_tv}
@@ -280,7 +319,7 @@ export default function PlansPage() {
                           }
                         />
                       </td>
-                      <td className="text-center border">
+                      <td className="border text-center">
                         <input
                           type="checkbox"
                           checked={editPlanData.popular}
@@ -292,16 +331,15 @@ export default function PlansPage() {
                           }
                         />
                       </td>
-                      <td className="py-2 px-4 border text-center flex gap-2 justify-center">
-                        <button
-                          onClick={() => handleSave(plan.id)}
-                          className="text-green-600 hover:text-green-800"
-                        >
-                          <Save size={18} />
+                      <td className="border text-center flex gap-2 justify-center">
+                        <button onClick={() => handleSave(plan.id)}>
+                          <Save size={18} className="text-green-600" />
                         </button>
                         <button
-                          onClick={() => setEditPlanId(null)}
-                          className="text-gray-500 hover:text-gray-700"
+                          onClick={() => {
+                            setEditPlanId(null);
+                            setEditPlanData(null);
+                          }}
                         >
                           <X size={18} />
                         </button>
@@ -309,45 +347,39 @@ export default function PlansPage() {
                     </>
                   ) : (
                     <>
-                      <td className="py-2 px-4 border font-semibold text-gray-800">
+                      <td className="border p-2 font-semibold">
                         {plan.name}
                       </td>
-                      <td className="py-2 px-4 border">{plan.speed}</td>
-                      <td className="py-2 px-4 border">₹{plan.price}</td>
-                      <td className="py-2 px-4 border">{plan.features}</td>
-                      <td className="text-center border">
+                      <td className="border p-2">{plan.speed}</td>
+                      <td className="border p-2">₹{plan.price}</td>
+                      <td className="border p-2">{plan.features}</td>
+                      <td className="border text-center">
                         {plan.ott ? (
                           <CheckCircle2 className="text-green-600 inline" />
                         ) : (
                           <XCircle className="text-red-500 inline" />
                         )}
                       </td>
-                      <td className="text-center border">
+                      <td className="border text-center">
                         {plan.live_tv ? (
                           <CheckCircle2 className="text-green-600 inline" />
                         ) : (
                           <XCircle className="text-red-500 inline" />
                         )}
                       </td>
-                      <td className="text-center border">
+                      <td className="border text-center">
                         {plan.popular ? (
                           <Star className="text-yellow-500 inline" />
                         ) : (
                           <XCircle className="text-gray-400 inline" />
                         )}
                       </td>
-                      <td className="py-2 px-4 border text-center flex gap-2 justify-center">
-                        <button
-                          onClick={() => handleEdit(plan)}
-                          className="text-blue-600 hover:text-blue-800"
-                        >
-                          <Edit size={18} />
+                      <td className="border text-center flex gap-2 justify-center">
+                        <button onClick={() => handleEdit(plan)}>
+                          <Edit size={18} className="text-blue-600" />
                         </button>
-                        <button
-                          onClick={() => handleDelete(plan.id)}
-                          className="text-red-600 hover:text-red-800"
-                        >
-                          <Trash2 size={18} />
+                        <button onClick={() => handleDelete(plan.id)}>
+                          <Trash2 size={18} className="text-red-600" />
                         </button>
                       </td>
                     </>

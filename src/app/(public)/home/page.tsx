@@ -25,6 +25,7 @@ import TestimonialCard from "@/components/TestimonialCard";
 import OfferBanner from "@/components/OfferBanner";
 import { seoData } from "@/lib/seo.config";
 import ContactModal from "@/components/ContactModal";
+import InfrastructureTrustSection from "@/components/InfrastructureTrustSection"
 
 export const metadata: Metadata = seoData.home;
 
@@ -226,6 +227,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* NEW SECTION */}
+      <InfrastructureTrustSection />
 
       {/* Services Section */}
       <section className="py-20 bg-white" id="services">

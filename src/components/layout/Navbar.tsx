@@ -61,11 +61,11 @@ export default function Navbar() {
             </a>
             <span className="hidden sm:inline text-white/40">|</span>
             <a
-              href="mailto:info@velocitysignals.com"
+              href="mailto:info@boomnetwork.in"
               className="hidden sm:flex items-center gap-2 hover:text-white/80 transition-all group"
             >
               <MdEmail className="text-base group-hover:scale-110 transition-transform" />
-              <span>info@velocitysignals.com</span>
+              <span>info@boomnetwork.in</span>
             </a>
           </div>
 
@@ -202,13 +202,13 @@ export default function Navbar() {
                   +91 8588822022
                 </a>
                 <a
-                  href="mailto:info@velocitysignals.com"
+                  href="mailto:info@boomnetwork.in"
                   className="flex items-center gap-3 text-gray-900 hover:bg-gray-50 p-3 rounded-lg transition-all"
                 >
                   <div className="bg-[#de6f23]/10 w-10 h-10 rounded-lg flex items-center justify-center">
                     <MdEmail className="text-[#de6f23] text-lg" />
                   </div>
-                  info@velocitysignals.com
+                  info@boomnetwork.in
                 </a>
               </div>
 

@@ -18,7 +18,7 @@ const siteConfig = {
     email: {
       sales: "sales@velocitysignals.com",
       support: "support@velocitysignals.com",
-      info: "info@velocitysignals.com",
+      info: "info@boomnetwork.in",
     },
     // Two Addresses
     address1: {

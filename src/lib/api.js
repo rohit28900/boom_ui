@@ -1,16 +1,7 @@
 import axios from "axios";
 
-// Use environment variable with fallback to localhost
-// const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-const API_BASE_URL = "https://web-production-71f8b.up.railway.app"
-// const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = "https://web-production-71f8b.up.railway.app";
 
-// Log the API URL in development for debugging
-// if (process.env.NODE_ENV === 'development') {
-//   console.log('API Base URL:', API_BASE_URL);
-// }
-
-// Create Axios instance
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -24,7 +15,13 @@ export const get = async (url, config = {}) => {
     const response = await api.get(url, config);
     return response.data;
   } catch (error) {
-    throw error.response || error;
+    console.error("GET ERROR:", {
+      url,
+      message: error.message,
+      status: error.response?.status,
+      data: error.response?.data,
+    });
+    throw error; // ✅ THIS IS THE FIX
   }
 };
 
@@ -34,7 +31,8 @@ export const post = async (url, data, config = {}) => {
     const response = await api.post(url, data, config);
     return response.data;
   } catch (error) {
-    throw error.response || error;
+    console.error("POST ERROR:", error.response?.data || error.message);
+    throw error;
   }
 };
 
@@ -44,7 +42,8 @@ export const put = async (url, data, config = {}) => {
     const response = await api.put(url, data, config);
     return response.data;
   } catch (error) {
-    throw error.response || error;
+    console.error("PUT ERROR:", error.response?.data || error.message);
+    throw error;
   }
 };
 
@@ -54,7 +53,8 @@ export const remove = async (url, config = {}) => {
     const response = await api.delete(url, config);
     return response.data;
   } catch (error) {
-    throw error.response || error;
+    console.error("DELETE ERROR:", error.response?.data || error.message);
+    throw error;
   }
 };
 
