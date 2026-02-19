@@ -43,10 +43,10 @@ export default function Home() {
 
   const offerConfig = {
     title: "New Year Special Offer!",
-    description: "Get 50% OFF on installation + 3 Months Free Netflix",
+    description: "Get 50% OFF on installation",
     ctaText: "Claim Offer",
-    ctaLink: "/plans?offer=NewYear2026",
-    validUntil: "Valid until Jan 30, 2026",
+    ctaLink: "/plans?offer=Holi 2026",
+    validUntil: "Valid until March 30, 2026",
     badge: "Limited Time",
   };
 
