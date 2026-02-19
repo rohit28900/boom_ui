@@ -42,7 +42,7 @@ export default function Home() {
   const showOffer = true;
 
   const offerConfig = {
-    title: "New Year Special Offer!",
+    title: "Holi Special Offer!",
     description: "Get 50% OFF on installation",
     ctaText: "Claim Offer",
     ctaLink: "/plans?offer=Holi 2026",
