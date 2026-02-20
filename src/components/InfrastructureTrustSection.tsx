@@ -1,8 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
-import { Globe, Network, ShieldCheck, MapPin, Zap } from "lucide-react"
+import { motion, useSpring, useInView, useMotionValue } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
+import { Globe, Network, ShieldCheck, MapPin, Zap, Activity } from "lucide-react"
 
 const stats = [
   { label: "States Covered", value: 8, suffix: "+", icon: MapPin },
@@ -11,102 +11,132 @@ const stats = [
   { label: "Enterprise & Govt Sites", value: 20, suffix: "+", icon: ShieldCheck },
 ]
 
-function AnimatedCounter({ value, suffix = "" }: any) {
-  const [count, setCount] = useState(0)
+/**
+ * 🛠️ Fixed Animated Counter
+ * Extracts the raw numeric value from MotionValue to avoid "Objects are not valid" error.
+ */
+function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  
+  const [displayValue, setDisplayValue] = useState(0)
+  const motionValue = useMotionValue(0)
+  
+  const springValue = useSpring(motionValue, {
+    mass: 1,
+    stiffness: 100,
+    damping: 30,
+  })
 
+  // Set the motion value when in view
   useEffect(() => {
-    let start = 0
-    const end = value
-    const duration = 1800
-    const step = end / (duration / 20)
+    if (isInView) {
+      motionValue.set(value)
+    }
+  }, [isInView, value, motionValue])
 
-    const timer = setInterval(() => {
-      start += step
-      if (start >= end) {
-        setCount(end)
-        clearInterval(timer)
-      } else {
-        setCount(Math.floor(start))
-      }
-    }, 20)
-
-    return () => clearInterval(timer)
-  }, [value])
+  // Sync the spring animation to local state so React can render it
+  useEffect(() => {
+    const unsubscribe = springValue.on("change", (latest) => {
+      setDisplayValue(Math.floor(latest))
+    })
+    return () => unsubscribe()
+  }, [springValue])
 
   return (
-    <span className="text-4xl md:text-6xl font-extrabold text-gray-900 tabular-nums tracking-tighter">
-      {count}
-      {suffix}
+    <span ref={ref} className="text-5xl md:text-7xl font-[1000] tracking-tighter text-slate-900 tabular-nums leading-none">
+      {displayValue}
+      <span className="text-[#de6f23]">{suffix}</span>
     </span>
   )
 }
 
 export default function InfrastructureTrustSection() {
   return (
-    <section className="relative py-24 bg-white">
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="relative py-32 bg-white overflow-hidden">
+      {/* 🌐 Subtle Fiber Grid Background */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+        <div 
+          className="absolute inset-0" 
+          style={{ 
+            backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', 
+            backgroundSize: '40px 40px' 
+          }} 
+        />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6">
         
-        {/* Header - Clean & Left Aligned for a modern feel */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="max-w-2xl"
-          >
-            <div className="flex items-center gap-2 text-[#de6f23] font-bold tracking-widest uppercase text-xs mb-4">
-              <Zap className="w-4 h-4" />
-              Infrastructure Capability
+        {/* 🛠️ TOP UTILITY BAR */}
+        <div className="flex items-center gap-4 mb-12">
+            <div className="h-px flex-1 bg-slate-100" />
+            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-100 bg-slate-50/50 text-[#de6f23] text-[10px] font-black uppercase tracking-[0.3em]">
+                <Activity className="w-3 h-3 animate-pulse" />
+                Live Infrastructure Status
             </div>
-            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
-              Pan-India Network & <br />
-              <span className="text-[#de6f23]">Strength.</span>
-            </h2>
-          </motion.div>
-          
-          <motion.p 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="max-w-md text-gray-500 text-lg leading-relaxed border-l-2 border-gray-100 pl-6"
-          >
-            Carrier-grade fiber and surveillance backbone services 
-            delivered nationwide in association with BSNL.
-          </motion.p>
+            <div className="h-px w-12 bg-slate-100" />
         </div>
 
-        {/* Stats - No Cards, just clean spacing */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 mb-32 border-y border-gray-100 py-16">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
+        {/* HEADER AREA */}
+        <div className="grid lg:grid-cols-12 gap-12 items-end mb-24">
+          <div className="lg:col-span-8">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="flex flex-col items-start"
+              className="text-6xl md:text-8xl font-[1000] text-slate-900 tracking-[-0.06em] leading-[0.85]"
             >
-              <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-              <p className="mt-3 text-sm font-bold uppercase tracking-wider text-gray-400">
-                {stat.label}
+              Pan-India <br />
+              <span className="text-slate-300">Network</span> & <span className="text-[#de6f23]">Strength.</span>
+            </motion.h2>
+          </div>
+          
+          <div className="lg:col-span-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              viewport={{ once: true }}
+              className="border-l-[3px] border-[#de6f23] pl-8 py-2"
+            >
+              <p className="text-slate-500 font-medium leading-relaxed italic">
+                Carrier-grade fiber and surveillance backbone services 
+                delivered nationwide in association with BSNL.
               </p>
             </motion.div>
+          </div>
+        </div>
+
+        {/* STATS ENGINE */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-100 border border-slate-100 rounded-[2.5rem] overflow-hidden mb-32 shadow-2xl shadow-slate-200/50">
+          {stats.map((stat, i) => (
+            <div key={i} className="bg-white p-12 flex flex-col items-start group hover:bg-slate-50 transition-colors">
+              <stat.icon className="w-5 h-5 text-slate-300 group-hover:text-[#de6f23] transition-colors mb-10" />
+              <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+              <p className="mt-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 group-hover:text-slate-600">
+                {stat.label}
+              </p>
+            </div>
           ))}
         </div>
 
-        {/* Capability Section - Typographic focus */}
-        <div className="grid md:grid-cols-3 gap-16">
+        {/* 🛰️ CAPABILITY ARCHITECTURE */}
+        <div className="grid md:grid-cols-3 gap-12 lg:gap-20">
           {[
             {
               title: "BSNL Association",
               desc: "Supporting national backbone and regional connectivity through BSNL-associated operations.",
+              code: "01"
             },
             {
               title: "Fiber Infrastructure",
               desc: "OFC deployment, splicing, and maintenance for ISPs, enterprises, and telecom towers.",
+              code: "02"
             },
             {
               title: "Tower Services",
               desc: "Carrier-grade connectivity for telecom towers, CCTV surveillance, and smart campuses.",
+              code: "03"
             },
           ].map((item, i) => (
             <motion.div
@@ -114,13 +144,17 @@ export default function InfrastructureTrustSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.2 }}
+              transition={{ delay: i * 0.1 }}
+              className="group"
             >
-              <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-                <span className="w-8 h-[2px] bg-[#de6f23]"></span>
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-[10px] font-black text-[#de6f23] font-mono tracking-tighter">[{item.code}]</span>
+                <div className="h-px flex-1 bg-slate-100 group-hover:bg-[#de6f23]/30 transition-colors" />
+              </div>
+              <h4 className="text-2xl font-[1000] text-slate-900 tracking-tight mb-4 group-hover:text-[#de6f23] transition-colors">
                 {item.title}
               </h4>
-              <p className="text-gray-600 leading-relaxed pl-11">
+              <p className="text-slate-500 font-medium leading-relaxed">
                 {item.desc}
               </p>
             </motion.div>

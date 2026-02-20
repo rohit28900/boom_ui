@@ -2,23 +2,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  Wifi,
-  ShieldCheck,
-  Headphones,
-  Cloud,
-  Router,
-  Globe,
-  Phone,
-  Network,
-  Lock,
-  Server,
-  ArrowRight,
-  X,
-  Sparkles,
-  Zap,
-  Wrench
+  Wifi, ShieldCheck, Headphones, Cloud, Router, Globe, Phone, Network,
+  Lock, Server, ArrowRight, X, Sparkles, Zap, Wrench, MapPin, Globe2, Users
 } from "lucide-react";
-import { MapPin, Globe2, Users } from "lucide-react";
 
 import HeroSlider from "@/components/HeroSlider";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -51,292 +37,172 @@ export default function Home() {
   };
 
   const features = [
-    {
-      icon: Wifi,
-      title: "Up to 1 Gbps Speed",
-      description:
-        "Lightning-fast fiber internet for seamless streaming, gaming, and remote work.",
-    },
-    {
-      icon: ShieldCheck,
-      title: "99.9% Uptime SLA",
-      description:
-        "Enterprise-grade reliability backed by redundant fiber infrastructure.",
-    },
-    {
-      icon: Headphones,
-      title: "24/7 Expert Support",
-      description:
-        "Round-the-clock technical assistance via phone, chat, and email.",
-    },
+    { icon: Wifi, title: "Up to 1 Gbps Speed", description: "Lightning-fast fiber internet for seamless streaming, gaming, and remote work." },
+    { icon: ShieldCheck, title: "99.9% Uptime SLA", description: "Enterprise-grade reliability backed by redundant fiber infrastructure." },
+    { icon: Headphones, title: "24/7 Expert Support", description: "Round-the-clock technical assistance via phone, chat, and email." },
   ];
 
   const services = [
-    {
-      icon: Phone,
-      title: "VoIP Cloud Telephony",
-      description:
-        "Cloud-based telephony with IVR, call recording, and analytics for seamless communication.",
-      features: [
-        "IVR Systems",
-        "Call Recording",
-        "Analytics",
-        "Multi-channel Support",
-      ],
-      href: "/services/voip",
-    },
-    {
-      icon: Wifi,
-      title: "Home Broadband & Enterprise Internet",
-      description:
-        "High-speed, reliable connectivity designed for homes and enterprises with guaranteed uptime.",
-      features: [
-        "99.9% Uptime",
-        "Dedicated Bandwidth",
-        "24/7 Support",
-        "Scalable Plans",
-      ],
-      href: "/services/internet",
-    },
-    {
-      icon: Globe,
-      title: "SD-WAN Solutions",
-      description:
-        "Intelligent network routing and optimization for enterprise-grade performance and security.",
-      features: [
-        "Centralized Control",
-        "Cloud Ready",
-        "Secure Routing",
-        "Cost Optimization",
-      ],
-      href: "/services/sdwan",
-    },
-    {
-      icon: Network,
-      title: "Internet Leased Lines",
-      description:
-        "Dedicated, symmetrical internet connections for mission-critical business applications.",
-      features: [
-        "Low Latency",
-        "SLA Guaranteed",
-        "Symmetrical Speed",
-        "Enterprise Grade",
-      ],
-      href: "/services/leased-lines",
-    },
-    {
-      icon: Router,
-      title: "Networking Solutions",
-      description:
-        "End-to-end network architecture, cabling, monitoring, and integrated security for enterprises.",
-      features: [
-        "LAN/WAN Setup",
-        "Monitoring",
-        "Integrated Security",
-        "Custom Design",
-      ],
-      href: "/services/networking",
-    },
-    {
-      icon: Lock,
-      title: "Government & Defense Connectivity",
-      description:
-        "Secure and compliant infrastructure tailored for government and defense network needs.",
-      features: [
-        "End-to-End Encryption",
-        "Private Infrastructure",
-        "24/7 Monitoring",
-        "Compliance Ready",
-      ],
-      href: "/services/government",
-    },
+    { icon: Phone, title: "VoIP Cloud Telephony", description: "Cloud-based telephony with IVR, call recording, and analytics for seamless communication.", features: ["IVR Systems", "Call Recording", "Analytics", "Multi-channel Support"], href: "/services/voip" },
+    { icon: Wifi, title: "Home Broadband & Enterprise Internet", description: "High-speed, reliable connectivity designed for homes and enterprises with guaranteed uptime.", features: ["99.9% Uptime", "Dedicated Bandwidth", "24/7 Support", "Scalable Plans"], href: "/services/internet" },
+    { icon: Globe, title: "SD-WAN Solutions", description: "Intelligent network routing and optimization for enterprise-grade performance and security.", features: ["Centralized Control", "Cloud Ready", "Secure Routing", "Cost Optimization"], href: "/services/sdwan" },
+    { icon: Network, title: "Internet Leased Lines", description: "Dedicated, symmetrical internet connections for mission-critical business applications.", features: ["Low Latency", "SLA Guaranteed", "Symmetrical Speed", "Enterprise Grade"], href: "/services/leased-lines" },
+    { icon: Router, title: "Networking Solutions", description: "End-to-end network architecture, cabling, monitoring, and integrated security for enterprises.", features: ["LAN/WAN Setup", "Monitoring", "Integrated Security", "Custom Design"], href: "/services/networking" },
+    { icon: Lock, title: "Government & Defense Connectivity", description: "Secure and compliant infrastructure tailored for government and defense network needs.", features: ["End-to-End Encryption", "Private Infrastructure", "24/7 Monitoring", "Compliance Ready"], href: "/services/government" },
   ];
 
   const testimonials = [
-    {
-      quote:
-        "Switched from my old ISP and the difference is night and day! Super reliable connection.",
-      author: "Priya Sharma",
-      rating: 4,
-    },
-    {
-      quote:
-        "Perfect for my home office setup. Great speed and responsive support team!",
-      author: "Rahul Mehta",
-      rating: 5,
-    },
-    {
-      quote:
-        "Excellent coverage throughout my home. Smooth streaming and great value.",
-      author: "Anjali Kumar",
-      rating: 5,
-    },
-  ];
-
-  const stats = [
-    { value: "50K+", label: "Happy Customers" },
-    { value: "25+", label: "Cities Covered" },
-    { value: "99.9%", label: "Uptime SLA" },
-    { value: "24/7", label: "Support Available" },
+    { quote: "Switched from my old ISP and the difference is night and day! Super reliable connection.", author: "Priya Sharma", rating: 4 },
+    { quote: "Perfect for my home office setup. Great speed and responsive support team!", author: "Rahul Mehta", rating: 5 },
+    { quote: "Excellent coverage throughout my home. Smooth streaming and great value.", author: "Anjali Kumar", rating: 5 },
   ];
 
   return (
-    <main className="relative min-h-screen bg-white text-gray-900">
-      {/* JSON-LD Structured Data for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-
+    <main className="relative min-h-screen bg-white text-gray-900 overflow-x-hidden">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       {showOffer && <OfferBanner {...offerConfig} />}
 
-      {/* Hero Section */}
-      <section className="relative" aria-label="Hero banner">
+      {/* ⚡ HERO SECTION */}
+      <section className="relative">
         <HeroSlider />
-        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-4">
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-6 w-full px-4">
           <Link
             href="/plans"
-            className="group bg-[#de6f23] hover:bg-[#c96320] px-10 py-4 rounded-full text-lg font-semibold text-white shadow-2xl transition-all hover:shadow-[#de6f23]/50 hover:scale-105 flex items-center gap-2"
+            className="group bg-[#de6f23] px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-[0.2em] text-white shadow-[0_20px_50px_rgba(222,111,35,0.3)] transition-all hover:scale-105 flex items-center gap-3"
           >
             View Plans
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
           </Link>
-          <p className="text-sm text-white/90 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full">
-            Plans starting from ₹499/month
-          </p>
+          <div className="bg-black/20 backdrop-blur-md px-6 py-2 rounded-full border border-white/10">
+            <p className="text-[10px] font-bold text-white uppercase tracking-widest">
+              Plans starting from <span className="text-[#de6f23]">₹499/month</span>
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto text-center px-4">
-          <h2 className="text-3xl font-bold text-[#de6f23] mb-12">
-            Why Choose Boom Networks
-          </h2>
-          <div className="grid md:grid-cols-3 gap-10">
+      {/* 🚀 FEATURES SECTION */}
+      <section className="py-32 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-[11px] font-black uppercase tracking-[0.4em] text-[#de6f23] mb-4">Core Network</h2>
+          <h3 className="text-4xl md:text-6xl font-[1000] tracking-tighter text-slate-900 mb-20 leading-[0.9]">
+            Why Choose <br /> Boom Networks
+          </h3>
+          <div className="grid md:grid-cols-3 gap-12">
             {features.map((f, i) => (
-              <div
-                key={i}
-                className="bg-white p-8 rounded-2xl shadow-lg shadow-[#de6f23]/10 hover:shadow-xl hover:shadow-[#de6f23]/20 transition-all border border-gray-100"
-              >
-                <f.icon className="w-12 h-12 mx-auto mb-4 text-[#de6f23]" />
-                <h3 className="text-xl font-semibold mb-2">{f.title}</h3>
-                <p className="text-gray-600">{f.description}</p>
+              <div key={i} className="group">
+                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-8 group-hover:bg-[#de6f23] group-hover:text-white transition-all duration-500">
+                  <f.icon strokeWidth={1.5} className="w-6 h-6 text-[#de6f23] group-hover:text-white" />
+                </div>
+                <h3 className="text-xl font-black tracking-tight mb-4">{f.title}</h3>
+                <p className="text-gray-500 leading-relaxed font-medium">{f.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
-      {/* NEW SECTION */}
+
       <InfrastructureTrustSection />
 
-      {/* Services Section */}
-      <section className="py-20 bg-white" id="services">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-[#de6f23] mb-12">
-            Our Services
-          </h2>
+      {/* 🛠️ SERVICES SECTION */}
+      <section className="py-32 bg-white" id="services">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-24">
+            <h2 className="text-5xl md:text-8xl font-[1000] tracking-tighter text-slate-900 leading-none">
+              Our <span className="text-[#de6f23]">Services.</span>
+            </h2>
+          </div>
+          
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((s, i) => (
               <Link
                 key={i}
                 href={s.href}
-                className="p-8 border rounded-2xl shadow-sm shadow-[#de6f23]/5 hover:shadow-lg hover:shadow-[#de6f23]/15 transition-all text-left group"
+                className="p-10 border border-slate-100 rounded-[2.5rem] hover:shadow-2xl hover:shadow-slate-200 transition-all flex flex-col h-full group"
               >
-                <s.icon className="w-10 h-10 mb-4 text-[#de6f23]" />
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-[#de6f23] transition-colors">
-                  {s.title}
-                </h3>
-                <p className="text-gray-600 mb-4">{s.description}</p>
-                <ul className="text-sm text-gray-500 mb-4 space-y-1 list-disc pl-5">
-                  {s.features.map((f, idx) => (
-                    <li key={idx}>{f}</li>
-                  ))}
-                </ul>
-                <span className="text-[#de6f23] font-medium group-hover:underline">
-                  Learn More →
-                </span>
+                <s.icon className="w-10 h-10 mb-8 text-[#de6f23] group-hover:scale-110 transition-transform" />
+                <h3 className="text-2xl font-black tracking-tighter mb-4 group-hover:text-[#de6f23] transition-colors">{s.title}</h3>
+                <p className="text-gray-500 font-medium text-sm leading-relaxed mb-8">{s.description}</p>
+                <div className="mt-auto">
+                    <ul className="space-y-2 mb-8 border-t border-slate-50 pt-8">
+                        {s.features.map((f, idx) => (
+                            <li key={idx} className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
+                                <div className="w-1 h-1 rounded-full bg-[#de6f23]" /> {f}
+                            </li>
+                        ))}
+                    </ul>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#de6f23] inline-flex items-center gap-2">
+                        Learn More <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform"/>
+                    </span>
+                </div>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
-  <div className="max-w-7xl mx-auto px-4 text-center">
-    
-    {/* Mission Heading */}
-    <h2 className="text-3xl font-bold text-[#de6f23] mb-4">
-      Connecting Delhi-NCR with Future-Ready Fiber Internet
-    </h2>
-    <p className="text-gray-600 max-w-2xl mx-auto mb-14 text-sm">
-      We are building a next-generation internet network designed for 
-      homes, startups, gamers, and enterprises — 
-      delivering fast, reliable, and affordable FTTH across Delhi-NCR.
-    </p>
+      {/* 📍 NCR MISSION SECTION */}
+      <section className="py-32 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-4xl mx-auto mb-20">
+            <h2 className="text-4xl md:text-6xl font-[1000] tracking-tighter text-slate-900 leading-[0.9] mb-8">
+              Connecting India with <br /> <span className="text-[#de6f23]">Future-Ready</span> Fiber Internet
+            </h2>
+            <p className="text-gray-500 text-lg font-medium leading-relaxed">
+              We are building a next-generation internet network designed for 
+              homes, startups, gamers, and enterprises — 
+              delivering fast, reliable, and affordable FTTH across India.
+            </p>
+          </div>
 
-    {/* Coverage & Trust Grid */}
-    <div className="grid md:grid-cols-4 gap-6 mb-16">
-      
-      <div className="bg-white p-6 rounded-2xl shadow-md text-center hover:shadow-lg transition">
-        <Wifi className="w-10 h-10 text-[#de6f23] mx-auto mb-3" />
-        <h3 className="font-semibold text-lg text-gray-800">FTTH Network</h3>
-        <p className="text-gray-500 text-sm">High-speed fiber to home & business</p>
-      </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+            {[
+              { icon: Wifi, t: "FTTH Network", d: "High-speed fiber to home & business" },
+              { icon: Globe2, t: "Low-Latency Backbone", d: "Built for 4K streaming, gaming & WFH" },
+              { icon: Users, t: "Local NOC Support", d: "Dedicated Delhi-NCR service engineers" },
+              { icon: MapPin, t: "Expanding Across NCR", d: "Shahdara • Noida • Ghaziabad • Gurgaon" }
+            ].map((item, i) => (
+              <div key={i} className="bg-white p-8 rounded-3xl border border-slate-100 flex flex-col items-center text-center group">
+                <item.icon className="w-10 h-10 text-[#de6f23] mb-6 group-hover:scale-110 transition-transform" />
+                <h3 className="font-black tracking-tight text-lg mb-2">{item.t}</h3>
+                <p className="text-gray-500 text-xs font-medium leading-relaxed uppercase tracking-widest">{item.d}</p>
+              </div>
+            ))}
+          </div>
 
-      <div className="bg-white p-6 rounded-2xl shadow-md text-center hover:shadow-lg transition">
-        <Globe2 className="w-10 h-10 text-[#de6f23] mx-auto mb-3" />
-        <h3 className="font-semibold text-lg text-gray-800">Low-Latency Backbone</h3>
-        <p className="text-gray-500 text-sm">Built for 4K streaming, gaming & WFH</p>
-      </div>
+          <div className="bg-slate-900 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
+             <div className="absolute top-0 right-0 w-64 h-64 bg-[#de6f23]/10 blur-[100px]" />
+             <h4 className="text-3xl font-[1000] text-white tracking-tighter mb-4">Want Fiber Connection?</h4>
+             <p className="text-slate-400 mb-10 font-medium">Call our support team to check coverage in your area.</p>
+             <a
+               href="tel:+918588822022"
+               className="inline-flex bg-[#de6f23] text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-[#de6f23]/20 hover:bg-[#c9621f] transition-all"
+             >
+               Call Now
+             </a>
+          </div>
+        </div>
+      </section>
 
-      <div className="bg-white p-6 rounded-2xl shadow-md text-center hover:shadow-lg transition">
-        <Users className="w-10 h-10 text-[#de6f23] mx-auto mb-3" />
-        <h3 className="font-semibold text-lg text-gray-800">Local NOC Support</h3>
-        <p className="text-gray-500 text-sm">Dedicated Delhi-NCR service engineers</p>
-      </div>
-
-      <div className="bg-white p-6 rounded-2xl shadow-md text-center hover:shadow-lg transition">
-        <MapPin className="w-10 h-10 text-[#de6f23] mx-auto mb-3" />
-        <h3 className="font-semibold text-lg text-gray-800">Expanding Across NCR</h3>
-        <p className="text-gray-500 text-sm">Shahdara • Noida • Ghaziabad • Gurgaon</p>
-      </div>
-    </div>
-
-    {/* CTA */}
-    <div className="bg-white border border-gray-100 shadow-lg rounded-2xl p-8 md:p-10 flex flex-col items-center">
-      <h4 className="text-xl font-bold text-gray-800 mb-2">Want Fiber Connection?</h4>
-      <p className="text-gray-600 mb-6 text-sm">Call our support team to check coverage in your area.</p>
-      <a
-        href="tel:+91 8588822022"
-        className="bg-[#de6f23] text-white px-8 py-3 rounded-xl font-semibold shadow-md hover:bg-[#c9621f] transition"
-      >
-        Call Now
-      </a>
-    </div>
-
-  </div>
-</section>
-
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-white" id="testimonials">
-        <div className="max-6xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-[#de6f23] mb-12">
-            What Our Customers Say
-          </h2>
+      {/* 🗨️ TESTIMONIALS SECTION */}
+      <section className="py-32 bg-white" id="testimonials">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-24">
+            <h2 className="text-[11px] font-black uppercase tracking-[0.4em] text-[#de6f23] mb-4">Voices</h2>
+            <h3 className="text-4xl md:text-6xl font-[1000] tracking-tighter text-slate-900 leading-[0.9]">
+              What Our <br /> Customers Say
+            </h3>
+          </div>
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((t, i) => (
-              <TestimonialCard
-                key={i}
-                quote={t.quote}
-                author={t.author}
-                rating={t.rating}
-              />
+              <div key={i} className="hover:-translate-y-2 transition-transform duration-500">
+                <TestimonialCard {...t} />
+              </div>
             ))}
           </div>
         </div>
       </section>
+      
       <ContactModal image="/form.png"/>
     </main>
   );
