@@ -1,29 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
-  WifiHigh,
-  MapPin,
-  CheckCircle,
-  Warning,
-  MagnifyingGlass,
-  Spinner,
+  WifiHigh, MapPin, CheckCircle, Warning, MagnifyingGlass,
+  Spinner, Globe, ArrowRight, Buildings, Info
 } from "phosphor-react";
 import Link from "next/link";
 
-export default function FeasibilityPage() {
-  const [pincode, setPincode] = useState("");
-  const [result, setResult] = useState<null | boolean>(null);
-  const [loading, setLoading] = useState(false);
-  const [pincodeData, setPincodeData] = useState<
-    Record<string, Array<{ locality: string; city: string; state: string }>>
-  >({});
-  const [locations, setLocations] = useState<
-    Array<{ locality: string; city: string; state: string }>
-  >([]);
-
-  // 🔹 Inline JSON Data
-  const PIN_CODES = [
+// 🔹 Optimized Data Structure moved outside for performance
+const PIN_CODES = [
     { Locality: "Sector 2", Pincode: 201301, City: "Noida", State: "Uttar Pradesh" },
     { Locality: "Sector 3", Pincode: 201301, City: "Noida", State: "Uttar Pradesh" },
     { Locality: "Sector 4", Pincode: 201301, City: "Noida", State: "Uttar Pradesh" },
@@ -62,173 +47,166 @@ export default function FeasibilityPage() {
     { Locality: "kharar", Pincode: 140301, City: "Mohali", State: "Haryana" },
     { Locality: "balongi", Pincode: 160055, City: "Mohali", State: "Haryana" },
     { Locality: "sec 82", Pincode: 160059, City: "Mohali", State: "Haryana" }
-  ];
+];
 
-  // 🔹 Map JSON Data Once
-  useEffect(() => {
-    const mapped: Record<
-      string,
-      Array<{ locality: string; city: string; state: string }>
-    > = {};
+export default function FeasibilityPage() {
+  const [pincode, setPincode] = useState("");
+  const [result, setResult] = useState<null | boolean>(null);
+  const [loading, setLoading] = useState(false);
+  const [locations, setLocations] = useState<any[]>([]);
 
+  // 🔹 Memoized lookup table for instant O(1) access
+  const pincodeMap = useMemo(() => {
+    const mapped: Record<string, any[]> = {};
     PIN_CODES.forEach((item) => {
       const pin = item.Pincode.toString();
       if (!mapped[pin]) mapped[pin] = [];
-      mapped[pin].push({
-        locality: item.Locality,
-        city: item.City,
-        state: item.State,
-      });
+      mapped[pin].push(item);
     });
-
-    setPincodeData(mapped);
+    return mapped;
   }, []);
 
   const handleCheck = async () => {
-    if (!pincode) return;
+    if (!pincode || pincode.length < 6) return;
     setLoading(true);
     setResult(null);
-    setLocations([]);
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    
+    // Simulate network delay for UX
+    await new Promise((r) => setTimeout(r, 800));
 
-    const matches = pincodeData[pincode.trim()];
-    const isAvailable = !!matches && matches.length > 0;
-    setResult(isAvailable);
-    if (isAvailable) setLocations(matches);
+    const matches = pincodeMap[pincode.trim()];
+    if (matches) {
+      setResult(true);
+      setLocations(matches);
+    } else {
+      setResult(false);
+    }
     setLoading(false);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) =>
-    e.key === "Enter" && handleCheck();
-
   return (
-    <main className="min-h-screen bg-gray-50 text-gray-900 relative">
-      {/* Hero Section */}
-      <section className="relative pt-28 pb-16 text-center">
-        <div className="container mx-auto px-6">
-          <div className="flex justify-center mb-8">
-            <div className="p-6 rounded-2xl shadow-lg bg-orange-500">
-              <WifiHigh size={48} weight="fill" className="text-white" />
+    <main className="min-h-screen bg-white text-gray-900 selection:bg-[#de6f23]/20">
+      
+      {/* 📡 MODERN HERO */}
+      <section className="relative pt-32 pb-20 overflow-hidden bg-slate-50">
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 text-[#de6f23] text-[10px] font-black uppercase tracking-[0.2em] mb-8 shadow-sm">
+                <Globe className="w-4 h-4" />
+                <span>Live Network Coverage Check</span>
             </div>
-          </div>
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-blue-500">
-            Supercharge Your Internet Speed
-          </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-            Check if our lightning-fast fiber network is available in your area.
-          </p>
+            
+            <h1 className="text-5xl md:text-8xl font-[1000] tracking-tighter text-gray-900 leading-[0.85] mb-8">
+                Is Boom Available <br />
+                <span className="text-[#de6f23]">In Your Street?</span>
+            </h1>
+            
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
+                We are rapidly expanding our fiber backbone across Delhi-NCR and beyond. 
+                Enter your PIN code to verify 1Gbps feasibility.
+            </p>
         </div>
       </section>
 
-      {/* Search Section */}
-      <section className="container mx-auto px-6 pb-20">
-        <div className="bg-white border border-gray-100 rounded-3xl shadow-xl p-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 text-blue-500">
-            Find Your Connection
-          </h2>
-          <p className="text-center text-gray-500 mb-8">
-            Enter your PIN code to see if Boom Network is available.
-          </p>
-
-          {/* Input and Button */}
-          <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-            <input
-              type="text"
-              placeholder="Enter PIN code e.g., 201301"
-              value={pincode}
-              onChange={(e) => setPincode(e.target.value)}
-              onKeyPress={handleKeyPress}
-              className="flex-1 md:w-80 border border-gray-300 rounded-xl px-6 py-4 text-lg font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
-            />
-            <button
-              onClick={handleCheck}
-              disabled={loading || !pincode}
-              className={`flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white text-lg shadow-md transition-all ${
-                loading || !pincode
-                  ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-orange-500 hover:bg-orange-600"
-              }`}
-            >
-              {loading ? (
-                <>
-                  <Spinner size={20} className="animate-spin" /> Checking...
-                </>
-              ) : (
-                <>
-                  <MagnifyingGlass size={22} weight="bold" /> Check Now
-                </>
-              )}
-            </button>
+      {/* 🔍 SEARCH CONSOLE */}
+      <section className="max-w-5xl mx-auto px-6 -mt-16 pb-32 relative z-20">
+        <div className="bg-white rounded-[3rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)] border border-gray-100 p-8 md:p-16">
+          
+          <div className="max-w-2xl mx-auto">
+              <div className="relative group">
+                <input
+                  type="text"
+                  maxLength={6}
+                  placeholder="Enter 6-digit PIN code..."
+                  value={pincode}
+                  onChange={(e) => setPincode(e.target.value.replace(/\D/g, ""))}
+                  onKeyDown={(e) => e.key === "Enter" && handleCheck()}
+                  className="w-full bg-gray-50 border-2 border-transparent focus:border-[#de6f23] focus:bg-white rounded-[2rem] px-10 py-8 text-2xl font-black tracking-widest placeholder:text-gray-300 placeholder:tracking-normal outline-none transition-all shadow-inner"
+                />
+                <button
+                  onClick={handleCheck}
+                  disabled={loading || pincode.length < 6}
+                  className="absolute right-3 top-3 bottom-3 px-8 rounded-[1.5rem] bg-[#de6f23] text-white font-black text-xs uppercase tracking-widest hover:bg-black transition-all disabled:opacity-30 disabled:hover:bg-[#de6f23] flex items-center gap-3 active:scale-95 shadow-xl shadow-[#de6f23]/20"
+                >
+                  {loading ? <Spinner className="animate-spin" size={20} /> : <MagnifyingGlass weight="bold" size={20} />}
+                  <span>{loading ? "Scanning..." : "Verify"}</span>
+                </button>
+              </div>
+              <p className="mt-6 text-center text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center justify-center gap-2">
+                <Info size={14} /> Only 6-digit Indian PIN codes supported
+              </p>
           </div>
 
-          {/* Results */}
+          {/* 📊 RESULTS INTERFACE */}
           {result !== null && (
-            <div className="mt-12">
+            <div className="mt-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
               {result ? (
-                <div className="rounded-2xl p-10 text-center border-2 border-blue-500 bg-blue-50">
-                  <div className="flex justify-center mb-4">
-                    <CheckCircle size={64} weight="fill" className="text-blue-500" />
-                  </div>
-                  <h3 className="text-3xl font-bold mb-2 text-blue-500">
-                    Great news! We're available in your area.
-                  </h3>
-                  <p className="text-gray-600 mb-6">
-                    These localities are covered under this PIN:
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-                    {locations.map((loc, idx) => (
-                      <div
-                        key={idx}
-                        className="bg-white border rounded-xl p-6 shadow-sm text-left hover:shadow-md transition-all"
-                      >
-                        <div className="flex items-center gap-2 mb-2">
-                          <MapPin size={20} weight="fill" className="text-orange-500" />
-                          <p className="text-lg font-bold text-gray-900">
-                            {loc.locality}
-                          </p>
+                <div className="space-y-12">
+                   <div className="flex flex-col items-center text-center">
+                        <div className="w-20 h-20 bg-green-50 text-green-500 rounded-[2rem] flex items-center justify-center mb-6 shadow-sm border border-green-100">
+                            <CheckCircle size={44} weight="fill" />
                         </div>
-                        <p className="text-gray-700">{loc.city}</p>
-                        <p className="text-sm text-gray-500">{loc.state}</p>
+                        <h3 className="text-4xl font-[1000] text-gray-900 tracking-tight mb-2">Maximum Speed Feasible!</h3>
+                        <p className="text-gray-500 font-medium">We found {locations.length} service zones under PIN {pincode}:</p>
+                   </div>
+
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {locations.map((loc, idx) => (
+                      <div key={idx} className="group bg-gray-50 p-6 rounded-[2rem] border border-gray-100 hover:bg-white hover:border-[#de6f23]/30 transition-all flex items-center gap-6">
+                        <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-[#de6f23] shadow-sm border border-gray-100 group-hover:bg-[#de6f23] group-hover:text-white transition-all">
+                            <MapPin size={24} weight="bold" />
+                        </div>
+                        <div>
+                            <p className="text-lg font-black text-gray-900 tracking-tight leading-none mb-1 uppercase">{loc.Locality}</p>
+                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{loc.City}, {loc.State}</p>
+                        </div>
                       </div>
                     ))}
                   </div>
 
-                  <div className="flex flex-wrap gap-4 justify-center">
-                    <Link
-                      href="/plans"
-                      className="px-10 py-4 text-white font-bold rounded-xl shadow-md bg-blue-500 hover:bg-blue-600"
-                    >
-                      View Plans
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+                    <Link href="/plans" className="px-12 py-5 bg-gray-900 text-white font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-black transition-all shadow-2xl active:scale-95 flex items-center gap-3">
+                      Configure My Plan <ArrowRight weight="bold" />
                     </Link>
-                    <Link
-                      href="/contact"
-                      className="px-10 py-4 border-2 font-bold rounded-xl shadow-md border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-all"
-                    >
-                      Contact Us
+                    <Link href="/contact" className="px-12 py-5 border border-gray-200 text-gray-900 font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-gray-50 transition-all">
+                      Speak to an Engineer
                     </Link>
                   </div>
                 </div>
               ) : (
-                <div className="rounded-2xl p-10 text-center border-2 border-orange-500 bg-orange-50">
-                  <div className="flex justify-center mb-4">
-                    <Warning size={64} weight="fill" className="text-orange-500" />
+                <div className="bg-orange-50/50 rounded-[3rem] p-12 text-center border border-orange-100 border-dashed">
+                  <div className="w-20 h-20 bg-orange-100 text-[#de6f23] rounded-[2rem] flex items-center justify-center mx-auto mb-6">
+                    <Warning size={44} weight="fill" />
                   </div>
-                  <h3 className="text-3xl font-bold mb-2 text-orange-500">
-                    We’re not in your area yet.
-                  </h3>
-                  <p className="text-gray-600 mb-8">
-                    But we’re expanding fast! Register your interest and we’ll notify you soon.
+                  <h3 className="text-3xl font-[1000] text-gray-900 tracking-tight mb-4 uppercase">Out of Direct Coverage</h3>
+                  <p className="text-gray-500 font-medium max-w-md mx-auto mb-10">
+                    We haven't reached {pincode} yet, but we might be nearby! Register your interest and we'll prioritize your sector.
                   </p>
-                  <Link
-                    href="/contact"
-                    className="px-10 py-4 text-white font-bold rounded-xl shadow-md bg-orange-500 hover:bg-orange-600"
-                  >
-                    Notify Me
+                  <Link href="/contact" className="inline-flex items-center gap-3 bg-[#de6f23] text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-[#de6f23]/20 active:scale-95">
+                    Request Network Expansion <ArrowRight weight="bold" />
                   </Link>
                 </div>
               )}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* 🏢 CORPORATE FOOTER NOTE */}
+      <section className="max-w-7xl mx-auto px-6 py-20 border-t border-gray-100">
+        <div className="grid md:grid-cols-3 gap-12 text-center md:text-left">
+            {[
+                { icon: WifiHigh, t: "FTTH Ready", d: "Pure fiber-to-the-home architecture in all verified zones." },
+                { icon: Buildings, t: "Enterprise Feasibility", d: "Dedicated Leased Line feasibility requires manual survey." },
+                { icon: Globe, t: "NCR Backbone", d: "Direct peering with major content hubs for <5ms latency." }
+            ].map((item, i) => (
+                <div key={i} className="space-y-4">
+                    <item.icon size={32} className="text-[#de6f23] mx-auto md:mx-0" />
+                    <h4 className="text-sm font-black uppercase tracking-widest text-gray-900">{item.t}</h4>
+                    <p className="text-sm text-gray-500 font-medium leading-relaxed">{item.d}</p>
+                </div>
+            ))}
         </div>
       </section>
     </main>

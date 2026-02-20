@@ -225,7 +225,7 @@ export default function ClientServices() {
       image: '/service/voip.png',
     },
     {
-      slug: 'broadband',
+      slug: 'internet',
       icon: <Wifi className="w-10 h-10 text-[#0096FF]" />,
       title: 'Home Broadband & Enterprise Internet',
       description:

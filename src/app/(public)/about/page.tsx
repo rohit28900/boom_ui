@@ -1,7 +1,6 @@
 'use client';
 
 import {
-  Wifi,
   Users,
   Award,
   Target,
@@ -10,232 +9,176 @@ import {
   Headphones,
   TrendingUp,
   Rocket,
+  ArrowUpRight,
+  Fingerprint,
+  HeartHandshake,
+  Globe2
 } from 'lucide-react';
 
 export default function AboutPage() {
   const values = [
-    { icon: Rocket, title: "Innovation First", description: "We're building the future of connectivity with cutting-edge technology" },
-    { icon: Shield, title: "Secure & Reliable", description: "Enterprise-grade security and infrastructure from day one" },
-    { icon: Headphones, title: "Customer-Focused", description: "Responsive support team dedicated to your success" },
-    { icon: TrendingUp, title: "Scaling Fast", description: "Growing rapidly while maintaining quality and service excellence" }
+    { icon: Rocket, title: "Innovation First", description: "Architecting the next generation of fiber infrastructure using AI-driven network optimization." },
+    { icon: Shield, title: "Secure & Reliable", description: "Hardened enterprise-grade security protocols integrated into every node of our network." },
+    { icon: HeartHandshake, title: "Customer-Focused", description: "Bypassing scripts for real humans. Our support engineers are part of the local community." },
+    { icon: TrendingUp, title: "Scaling Fast", description: "Aggressively expanding our fiber footprint to bridge the digital divide in record time." }
   ];
 
   const stats = [
-    { number: "2024", label: "Founded" },
-    { number: "99.9%", label: "Uptime" },
-    { number: "1Gbps", label: "Max Speed" },
-    { number: "24/7", label: "Support" }
+    { number: "2024", label: "Est. Inception" },
+    { number: "99.9%", label: "Uptime SLA" },
+    { number: "10Gbps", label: "Core Capacity" },
+    { number: "24/7", label: "NOC Coverage" }
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-amber-50 relative overflow-hidden">
-      {/* 🟧 Background Glow Effects */}
-      <div
-        className="absolute top-0 right-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
-        style={{ backgroundColor: "rgba(222, 111, 35, 0.1)" }}
-      ></div>
-      <div
-        className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full blur-3xl"
-        style={{
-          backgroundColor: "rgba(222, 111, 35, 0.1)",
-          animation: "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-          animationDelay: "1s",
-        }}
-      ></div>
+    <main className="min-h-screen bg-white selection:bg-[#de6f23]/20">
+      
+      {/* 🟧 Sophisticated Hero Section */}
+      <section className="relative pt-32 pb-24 px-6 overflow-hidden">
+        {/* Animated Background Element */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-6xl">
+            <div className="absolute top-10 right-0 w-72 h-72 bg-[#de6f23]/10 rounded-full blur-[120px] animate-pulse" />
+            <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-400/5 rounded-full blur-[120px]" />
+        </div>
 
-      {/* 🟧 Hero Section */}
-      <section className="relative py-24 px-6 max-w-[1500px] mx-auto text-center">
-        <h1
-          className="text-5xl md:text-7xl font-bold mb-6 text-transparent"
-          style={{
-            backgroundImage: "linear-gradient(to right, #de6f23, #de6f23)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          About Us
-        </h1>
-        <p className="text-lg md:text-2xl text-gray-700 max-w-3xl mx-auto">
-          Revolutionizing internet connectivity with innovative technology and exceptional service
-        </p>
-      </section>
-
-      {/* 📊 Stats Section */}
-      <section className="max-w-[1500px] mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        {stats.map((stat, i) => (
-          <div
-            key={i}
-            className="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-xl transition-all"
-          >
-            <div className="text-4xl md:text-5xl font-bold text-[#de6f23] mb-2">
-              {stat.number}
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="flex flex-col items-center text-center space-y-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gray-50 border border-gray-100 text-gray-500 text-sm font-medium">
+                <span className="flex h-2 w-2 rounded-full bg-[#de6f23]" />
+                Powering the Digital Economy
             </div>
-            <div className="text-gray-700 font-medium">{stat.label}</div>
-          </div>
-        ))}
-      </section>
-
-      {/* 🧡 Our Story */}
-      <section className="max-w-[1500px] mx-auto px-6 py-16 grid md:grid-cols-2 gap-16 items-center">
-        <div>
-          <h2
-            className="text-4xl md:text-5xl font-bold mb-6 text-transparent"
-            style={{
-              backgroundImage: "linear-gradient(to right, #de6f23, #de6f23)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
-          >
-            Our Story
-          </h2>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            We started with a simple belief: everyone deserves fast, reliable internet access. Our founders saw an opportunity to bring better connectivity to communities, building a company focused on fiber-optic technology that puts customers first.
-          </p>
-          <p className="text-gray-700 leading-relaxed">
-            Today, we're on a mission to connect communities and empower homes and businesses with the internet infrastructure they need to thrive. Every connection we make is a step toward our vision of a truly connected world.
-          </p>
-        </div>
-
-        <div className="relative">
-          <img
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80"
-            alt="Team collaborating on internet technology"
-            className="rounded-3xl w-full h-80 object-cover shadow-xl border-4 border-[#de6f23]/30"
-          />
-          <div className="absolute -bottom-8 -right-8 bg-[#de6f23] text-white p-6 rounded-2xl shadow-xl">
-            <div className="text-3xl font-bold">100%</div>
-            <div className="text-sm font-medium">Startup Energy</div>
-          </div>
-        </div>
-      </section>
-
-      {/* 🎯 Mission Section */}
-      <section className="relative max-w-[1500px] mx-auto px-6 py-16 bg-[#de6f23]/10 rounded-3xl overflow-hidden">
-        <div className="relative z-10 text-center">
-          <Target className="w-10 h-10 mx-auto text-[#de6f23] mb-4" />
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-[#de6f23]">
-            Our Mission
-          </h2>
-          <p className="text-gray-700 leading-relaxed max-w-3xl mx-auto">
-            To disrupt the internet service industry by delivering cutting-edge fiber-optic technology with customer service that actually cares. Fast, reliable internet isn't a luxury—it's essential for modern life.
-          </p>
-        </div>
-      </section>
-
-      {/* 💡 Values Section */}
-      <section className="max-w-[1500px] mx-auto px-6 py-16">
-        <h2
-          className="text-4xl md:text-5xl font-bold text-center mb-12 text-transparent"
-          style={{
-            backgroundImage: "linear-gradient(to right, #de6f23, #de6f23)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          What Sets Us Apart
-        </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {values.map((v, i) => {
-            const Icon = v.icon;
-            return (
-              <div
-                key={i}
-                className="bg-white rounded-2xl p-8 border border-gray-200 hover:shadow-xl transition-all text-center"
-              >
-                <div className="w-16 h-16 mx-auto flex items-center justify-center mb-4 bg-[#de6f23] rounded-xl shadow-lg">
-                  <Icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  {v.title}
-                </h3>
-                <p className="text-gray-700 text-sm">{v.description}</p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 👥 Who We Serve */}
-      <section className="max-w-[1500px] mx-auto px-6 py-16">
-        <h2
-          className="text-4xl md:text-5xl font-bold text-center mb-12 text-transparent"
-          style={{
-            backgroundImage: "linear-gradient(to right, #de6f23, #de6f23)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          Who We Serve
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { icon: Users, title: "Home Users", desc: "Stream, game, and work from home without limits." },
-            { icon: Award, title: "Small Business", desc: "Reliable, scalable connectivity for startups and growing businesses." },
-            { icon: Zap, title: "Remote Workers", desc: "Optimized for video calls, cloud work, and remote productivity." },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="bg-white p-8 rounded-2xl border border-gray-200 hover:shadow-xl transition-all text-center"
-            >
-              <div className="w-14 h-14 mx-auto flex items-center justify-center mb-4 bg-[#de6f23] rounded-xl shadow-lg">
-                <item.icon className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                {item.title}
-              </h3>
-              <p className="text-gray-700 text-sm">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 👨‍💻 Team Section */}
-      <section className="relative max-w-[1500px] mx-auto px-6 py-16 rounded-3xl overflow-hidden shadow-xl border border-[#de6f23]/30">
-        <img
-          src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80"
-          alt="Our passionate startup team"
-          className="w-full h-96 object-cover rounded-3xl"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#de6f23]/60 via-transparent to-transparent flex items-end p-12">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
-              Our Team
-            </h2>
-            <p className="text-white text-lg">
-              Passionate entrepreneurs committed to revolutionizing internet connectivity
+            <h1 className="text-6xl md:text-8xl font-black text-gray-900 tracking-tighter leading-[0.9]">
+              Connecting <br />
+              <span className="text-[#de6f23]">The Future.</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-500 max-w-2xl leading-relaxed">
+              Boom Networks is more than an ISP. We are the architects of the 
+              uninterrupted digital experiences that drive modern life.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 🚀 CTA */}
-      <section className="max-w-[1500px] mx-auto px-6 py-16 text-center flex flex-col gap-6">
-        <h2
-          className="text-4xl md:text-5xl font-bold mb-4 text-transparent"
-          style={{
-            backgroundImage: "linear-gradient(to right, #de6f23, #de6f23)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-          }}
-        >
-          Join the Revolution
+      {/* 📊 Modern Stats - Bento Style */}
+      <section className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {stats.map((stat, i) => (
+            <div key={i} className="bg-gray-50/50 p-8 rounded-3xl border border-gray-100 flex flex-col justify-between group hover:bg-white hover:shadow-2xl hover:shadow-gray-200/50 transition-all duration-500">
+              <div className="text-4xl md:text-5xl font-black text-gray-900 group-hover:text-[#de6f23] transition-colors">
+                {stat.number}
+              </div>
+              <div className="text-gray-400 font-bold uppercase tracking-widest text-xs mt-4">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 🧡 Our Story - High Contrast */}
+      <section className="max-w-6xl mx-auto px-6 py-32">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="space-y-8">
+            <div className="inline-block px-3 py-1 bg-[#de6f23]/10 text-[#de6f23] text-xs font-bold rounded uppercase">Origin Story</div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              Challenging the <span className="italic font-serif">Status Quo</span> of Connectivity.
+            </h2>
+            <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
+                <p>
+                Founded in 2024, Boom Networks was born out of frustration with legacy infrastructure. We saw communities struggling with 20th-century tech in a 21st-century world.
+                </p>
+                <p className="font-medium text-gray-900">
+                Our mission was clear: Build a network that is as fast, flexible, and transparent as the cloud services it connects to.
+                </p>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="aspect-square rounded-[3rem] overflow-hidden shadow-2xl relative">
+               <img
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+                alt="Leadership Team"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#de6f23]/80 via-transparent to-transparent" />
+            </div>
+            {/* Floating Badge */}
+            <div className="absolute -bottom-10 -left-10 bg-white p-8 rounded-3xl shadow-2xl border border-gray-100 max-w-[240px]">
+                <Fingerprint className="w-10 h-10 text-[#de6f23] mb-4" />
+                <p className="text-sm font-bold text-gray-900 uppercase tracking-tighter">Bespoke Infrastructure for every client</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 💡 Value Propositions - Modern Cards */}
+      <section className="bg-gray-900 py-32 text-white overflow-hidden relative">
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-20">
+            <h2 className="text-4xl md:text-5xl font-bold max-w-xl">The Core Principles Driving Our Growth</h2>
+            <p className="text-gray-400 max-w-xs text-sm uppercase tracking-widest font-semibold">What sets us apart from legacy ISPs</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((v, i) => (
+              <div key={i} className="group flex flex-col h-full border-t border-white/10 pt-8 hover:border-[#de6f23] transition-colors">
+                <v.icon className="w-10 h-10 text-[#de6f23] mb-8" />
+                <h3 className="text-xl font-bold mb-4">{v.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-8">{v.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Abstract vector in background */}
+        <Globe2 className="absolute -right-20 -bottom-20 w-[500px] h-[500px] text-white/5" />
+      </section>
+
+      {/* 🎯 Impact Section */}
+      <section className="max-w-6xl mx-auto px-6 py-32 text-center">
+        <Target className="w-16 h-16 mx-auto text-[#de6f23] mb-10" />
+        <h2 className="text-5xl font-black text-gray-900 mb-8 max-w-4xl mx-auto leading-tight">
+          Ensuring that speed is a <span className="underline decoration-[#de6f23] decoration-8 underline-offset-[12px]">right</span>, not a privilege.
         </h2>
-        <p className="text-gray-700 text-lg max-w-2xl mx-auto mb-6">
-          Be part of our startup journey. We're changing internet connectivity, one connection at a time.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="/contact"
-            className="bg-[#de6f23] text-white px-10 py-4 rounded-xl font-bold hover:bg-[#c25e1e] transition"
-          >
-            Get Connected
-          </a>
-          <a
-            href="/plans"
-            className="border-2 border-[#de6f23] text-[#de6f23] px-10 py-4 rounded-xl font-bold hover:bg-[#de6f23]/10 transition"
-          >
-            Explore Plans
-          </a>
+        <div className="flex flex-wrap justify-center gap-12 mt-16">
+            <div className="flex items-center gap-4 text-left bg-gray-50 px-8 py-6 rounded-2xl border border-gray-100">
+                <Users className="w-8 h-8 text-[#de6f23]" />
+                <div>
+                    <h4 className="font-bold">Home Users</h4>
+                    <p className="text-sm text-gray-500">Unlocking 4K/8K living</p>
+                </div>
+            </div>
+            <div className="flex items-center gap-4 text-left bg-gray-50 px-8 py-6 rounded-2xl border border-gray-100">
+                <Award className="w-8 h-8 text-[#de6f23]" />
+                <div>
+                    <h4 className="font-bold">Enterprises</h4>
+                    <p className="text-sm text-gray-500">Mission-critical uptime</p>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      {/* 🚀 CTA - Clean & Bold */}
+      <section className="max-w-6xl mx-auto px-6 pb-32">
+        <div className="bg-[#de6f23] rounded-[3rem] p-12 md:p-24 text-center text-white relative overflow-hidden group">
+          <div className="relative z-10">
+            <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tighter">Ready for better?</h2>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="/contact"
+                className="bg-white text-gray-900 px-12 py-5 rounded-2xl font-black hover:scale-105 transition-transform flex items-center justify-center gap-2"
+              >
+                Join the Network
+                <ArrowUpRight className="w-5 h-5" />
+              </a>
+              <a
+                href="/plans"
+                className="bg-black/20 backdrop-blur-md text-white border border-white/20 px-12 py-5 rounded-2xl font-black hover:bg-black/40 transition-all"
+              >
+                View Plans
+              </a>
+            </div>
+          </div>
+          {/* Animated rings for CTA */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-white/10 rounded-full animate-[spin_20s_linear_infinite]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white/5 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
         </div>
       </section>
     </main>
